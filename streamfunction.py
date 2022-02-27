@@ -134,12 +134,20 @@ if __name__ == "__main__":
     to_goal = np.array([0, 0])
 
     # Define the obstacles
-    obstacles = np.array([[-10, -1, 0.5], [-8, -3, 0.5], [-7, 0, 0.5]])
+    obstacles = np.array(
+        [
+            [-9, 0.5, 0.7],
+            [-7, -2, 0.7],
+            [-6, 1, 0.7],
+            [-4, -1, 0.7],
+            [-3, 1, 0.7],
+        ]
+    )
 
     # Define the points at which to calculate the stream function
     SPACING = 100
     test_x, test_y = np.meshgrid(
-        np.linspace(-11, 1, 12 * SPACING), np.linspace(-4, 1, 5 * SPACING)
+        np.linspace(-11, 1, 12 * SPACING), np.linspace(-3, 3, 5 * SPACING)
     )
     test_points = np.column_stack((test_x.flatten(), test_y.flatten()))
 
@@ -150,9 +158,9 @@ if __name__ == "__main__":
 
     # Plot the stream function
     plt.figure(figsize=(10, 10))
-    plt.streamplot(test_x, test_y, field_x, field_y, density = 3)
+    plt.streamplot(test_x, test_y, field_x, field_y, density=3)
     # plt.quiver(test_x, test_y, field_x, field_y)
     plt.scatter(obstacles[:, 0], obstacles[:, 1], s=obstacles[:, 2] * 20000, c="k")
     plt.scatter(to_goal[0], to_goal[1], c="r")
-    plt.gca().set_aspect('equal', adjustable='box')
+    plt.gca().set_aspect("equal", adjustable="box")
     plt.show()
